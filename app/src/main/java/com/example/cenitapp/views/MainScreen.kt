@@ -1,10 +1,12 @@
 package com.example.cenitapp.views
 
-import android.annotation.SuppressLint
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
@@ -13,7 +15,6 @@ import com.example.cenitapp.components.CustomFab
 import com.example.cenitapp.components.CustomToolbar
 import com.example.cenitapp.navigation.NavManager
 
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun MainScreen() {
     val navController = rememberNavController()
@@ -37,8 +38,10 @@ fun MainScreen() {
                 CustomBottomNavigation(navController)
             }
         }
-    ) {
-        NavManager(navController)
+    ) { innerPadding ->
+        Box(modifier = Modifier.padding(innerPadding)) {
+            NavManager(navController)
+        }
     }
 }
 

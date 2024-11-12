@@ -2,8 +2,10 @@ package com.example.cenitapp.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import com.example.cenitapp.views.AccountScreen
 import com.example.cenitapp.views.CertificatesScreen
 import com.example.cenitapp.views.DetailsScreen
@@ -36,8 +38,12 @@ fun NavManager(navController: NavHostController) {
         composable("Onboarding") {
             OnBoardingScreen(navController)
         }
-        composable("Details") {
-            DetailsScreen(navController)
+        composable(
+            "Details/{id_proof}",
+            arguments = listOf(navArgument("id_proof") { type = NavType.StringType },)
+        ) {
+            val idProof = it.arguments?.getString("id_proof") ?: ""
+            DetailsScreen(navController, idProof)
         }
     }
 }

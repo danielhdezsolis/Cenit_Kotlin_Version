@@ -23,7 +23,7 @@ fun ContentRunningProofsScreen() {
     Column(
         modifier =
         Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
+        verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(text = "Running Proofs")

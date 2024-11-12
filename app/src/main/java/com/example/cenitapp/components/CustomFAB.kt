@@ -23,7 +23,7 @@ fun CustomFab(navController: NavHostController) {
         shape = CircleShape,
         modifier = Modifier
             .size(40.dp)
-            .offset(y = 30.dp)
+            .offset(y = 38.dp)
     ) {
         Icon(
             Icons.Default.Add,

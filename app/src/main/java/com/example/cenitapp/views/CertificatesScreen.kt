@@ -21,6 +21,7 @@ fun CertificatesScreen(navController: NavController) {
 
 @Composable
 fun ContentCertificatesScreen(navController: NavController) {
+    val id_proof = "123456789"
     Column(
         modifier =
         Modifier.fillMaxSize(),
@@ -28,7 +29,7 @@ fun ContentCertificatesScreen(navController: NavController) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(text = "Certificates Screen")
-        Button(onClick = {navController.navigate("Details")}, modifier = Modifier.align(Alignment.CenterHorizontally)){
+        Button(onClick = {navController.navigate("Details/${id_proof}")}, modifier = Modifier.align(Alignment.CenterHorizontally)){
             Text(text = "Detalles")
         }
     }
