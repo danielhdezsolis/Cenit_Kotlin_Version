@@ -1,9 +1,9 @@
 package com.example.cenitapp.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import com.example.cenitapp.views.AccountScreen
 import com.example.cenitapp.views.CertificatesScreen
 import com.example.cenitapp.views.DetailsScreen
@@ -13,28 +13,30 @@ import com.example.cenitapp.views.OnBoardingScreen
 import com.example.cenitapp.views.RunningProofsScreen
 
 @Composable
-fun NavManager(){
-    val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = "RunningProofs"){
-        composable("RunningProofs"){
+fun NavManager(navController: NavHostController) {
+    NavHost(
+        navController = navController,
+        startDestination = "RunningProofs"
+    ) {
+        composable("RunningProofs") {
             RunningProofsScreen(navController)
         }
-        composable("Certificates"){
+        composable("Certificates") {
             CertificatesScreen(navController)
         }
-        composable("Devices"){
+        composable("Devices") {
             DevicesScreen(navController)
         }
-        composable("Notifications"){
+        composable("Notifications") {
             NotificationsScreen(navController)
         }
-        composable("Account"){
+        composable("Account") {
             AccountScreen(navController)
         }
-        composable("Onboarding"){
+        composable("Onboarding") {
             OnBoardingScreen(navController)
         }
-        composable("Details"){
+        composable("Details") {
             DetailsScreen(navController)
         }
     }

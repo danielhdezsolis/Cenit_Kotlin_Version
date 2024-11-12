@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">CenitApp</string>
+
+    <!-- Etiquetas del bottom menu -->
+    <string name="RunningProofs_Menu">Pruebas</string>
+    <string name="Certificates_Menu">Certificados</string>
+    <string name="Devices_Menu">Dispositivos</string>
+    <string name="Notifications_Menu">Notificaciones</string>
+    <string name="Account_Menu">Cuenta</string>
+
+    <!-- Etiquetas del encabezado -->
+    <string name="RunningProofs_Header">Pruebas en ejecución</string>
+    <string name="Certificates_Header">Certificados</string>
+    <string name="Devices_Header">Dispositivos</string>
+    <string name="Notifications_Header">Notificaciones</string>
+    <string name="Account_Header">Cuenta</string>
+    <string name="OnBoarding_Header">Nueva Prueba</string>
+    <string name="Details_Header">Detalles</string>
+    <string name="Default_Header"> </string>
+    <string name="splashscreen_text">By Emerald</string>
 </resources>
