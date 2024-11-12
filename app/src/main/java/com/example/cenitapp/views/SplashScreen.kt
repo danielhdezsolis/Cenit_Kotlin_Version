@@ -33,10 +33,10 @@ class SplashActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-                SplashScreen {
-                    // Navegar a MainActivity después de la Splash
-                    startActivity(Intent(this, MainActivity::class.java))
-                    finish()
+            SplashScreen {
+                // Navegar a MainActivity después de la Splash
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
 
             }
         }
@@ -45,7 +45,7 @@ class SplashActivity : ComponentActivity() {
 
 @Composable
 fun SplashScreen(onTimeout: () -> Unit) {
-    val fontFamily =  FontFamily(Font(R.font.spacegrotesk_regular))
+    val fontFamily = FontFamily(Font(R.font.spacegrotesk_regular))
     LaunchedEffect(Unit) {
         delay(1500) // 2 segundos de espera
         onTimeout()
@@ -83,5 +83,5 @@ fun SplashScreen(onTimeout: () -> Unit) {
 @Preview(showBackground = true)
 @Composable
 fun PreviewSplashScreen() {
-        SplashScreen(onTimeout = {})
+    SplashScreen(onTimeout = {})
 }
