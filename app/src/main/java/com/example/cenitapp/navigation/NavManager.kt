@@ -6,20 +6,26 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.example.cenitapp.SupabaseAuthViewModel
 import com.example.cenitapp.views.AccountScreen
+import com.example.cenitapp.views.BlankScreen
 import com.example.cenitapp.views.CertificatesScreen
 import com.example.cenitapp.views.DetailsScreen
 import com.example.cenitapp.views.DevicesScreen
+import com.example.cenitapp.views.LoginScreen
 import com.example.cenitapp.views.NotificationsScreen
 import com.example.cenitapp.views.OnBoardingScreen
 import com.example.cenitapp.views.RunningProofsScreen
 
 @Composable
-fun NavManager(navController: NavHostController) {
+fun NavManager(navController: NavHostController, viewModel: SupabaseAuthViewModel) {
     NavHost(
         navController = navController,
-        startDestination = "RunningProofs"
+        startDestination = "BlankScreen"
     ) {
+        composable("Login") {
+            LoginScreen(navController, viewModel)
+        }
         composable("RunningProofs") {
             RunningProofsScreen(navController)
         }
@@ -44,6 +50,9 @@ fun NavManager(navController: NavHostController) {
         ) {
             val idProof = it.arguments?.getString("id_proof") ?: ""
             DetailsScreen(navController, idProof)
+        }
+        composable("BlankScreen"){
+            BlankScreen(navController, viewModel)
         }
     }
 }

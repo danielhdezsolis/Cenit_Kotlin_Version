@@ -1,7 +1,16 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
 }
+
+val properties = Properties().apply {
+    file("../local.properties").inputStream().use { load(it) }
+}
+
+val supabaseKey: String = properties.getProperty("supabaseKey")
+val supabaseUrl: String = properties.getProperty("supabaseUrl")
 
 android {
     namespace = "com.example.cenitapp"
@@ -15,6 +24,8 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "supabaseUrl", "\"$supabaseUrl\"")
+        buildConfigField("String", "supabaseKey", "\"$supabaseKey\"")
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -38,6 +49,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig= true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
@@ -67,4 +79,11 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
     implementation(libs.navigation.compose)
+    //implementation(libs.supabase.gotrue)        // Supabase GoTrue
+    implementation(platform(libs.supabase.bom))
+    implementation(libs.supabase.postgrest)
+    implementation(libs.ktor.client.cio)        // Ktor Client CIO
+    implementation(libs.lifecycle.viewmodel.compose) // Lifecycle ViewModel Compose
+    //DataStore
+    implementation(libs.data.store)
 }

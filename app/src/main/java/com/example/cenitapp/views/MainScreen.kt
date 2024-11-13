@@ -10,37 +10,40 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.cenitapp.SupabaseAuthViewModel
 import com.example.cenitapp.components.CustomBottomNavigation
 import com.example.cenitapp.components.CustomFab
 import com.example.cenitapp.components.CustomToolbar
 import com.example.cenitapp.navigation.NavManager
 
 @Composable
-fun MainScreen() {
+fun MainScreen(viewModel: SupabaseAuthViewModel) {
     val navController = rememberNavController()
     val currentBackStackEntry by navController.currentBackStackEntryAsState()
     val isOnboardingScreen = currentBackStackEntry?.destination?.route == "Onboarding"
+    val isLoginScreen = currentBackStackEntry?.destination?.route == "Login"
+    val isBlankScreen = currentBackStackEntry?.destination?.route == "BlankScreen"
 
     Scaffold(
         topBar = {
-            if (!isOnboardingScreen) {
+            if (!isOnboardingScreen && !isLoginScreen && !isBlankScreen) {
                 CustomToolbar(navController)
             }
         },
         floatingActionButton = {
-            if (!isOnboardingScreen) {
+            if (!isOnboardingScreen && !isLoginScreen && !isBlankScreen) {
                 CustomFab(navController)
             }
         },
         floatingActionButtonPosition = FabPosition.Center,
         bottomBar = {
-            if (!isOnboardingScreen) {
+            if (!isOnboardingScreen && !isLoginScreen && !isBlankScreen) {
                 CustomBottomNavigation(navController)
             }
         }
     ) { innerPadding ->
         Box(modifier = Modifier.padding(innerPadding)) {
-            NavManager(navController)
+            NavManager(navController, viewModel)
         }
     }
 }
@@ -48,5 +51,6 @@ fun MainScreen() {
 @Preview
 @Composable
 fun MainScreenPreview() {
-    MainScreen()
+    val viewModel = SupabaseAuthViewModel()
+    MainScreen(viewModel)
 }
