@@ -126,7 +126,7 @@ class SupabaseAuthViewModel : ViewModel() {
                     _userState.value = UserState.NotAuthenticated
                     Log.i("Supabase", "No hay token")
                 } else {
-                    client.gotrue.retrieveUser(token)
+//                    client.gotrue.retrieveUser(token)
                     client.gotrue.refreshCurrentSession()
                     saveToken(userPreferences)
                     _userState.value = UserState.Authenticated

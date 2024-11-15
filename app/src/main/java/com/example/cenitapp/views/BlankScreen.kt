@@ -17,41 +17,12 @@ import com.example.cenitapp.data.model.UserState
 import kotlinx.coroutines.delay
 
 @Composable
-//fun BlankScreen(navController: NavController, viewModel: SupabaseAuthViewModel = viewModel()) {
-//    val userState by viewModel.userState
-//    val context = LocalContext.current
-//
-//    // Llamar a la función isUserLoggedIn solo cuando la pantalla se muestra
-//    LaunchedEffect(Unit) {
-//        viewModel.isUserLoggedIn(context)
-//    }
-//
-//    // Observa el estado del usuario y redirige en consecuencia
-//    LaunchedEffect(userState) {
-//        when (userState) {
-//            is UserState.Authenticated -> {
-//                navController.navigate("RunningProofs") {
-//                    popUpTo("BlankScreen") { inclusive = true }
-//                }
-//            }
-//            UserState.NotAuthenticated -> {
-//                navController.navigate("Login") {
-//                    popUpTo("BlankScreen") { inclusive = true }
-//                }
-//            }
-//            else -> {
-//                // Mantener en BlankScreen para los otros estados como Loading o Error
-//            }
-//        }
-//    }
-//}
 fun BlankScreen(navController: NavController, viewModel: SupabaseAuthViewModel = viewModel()) {
     val userState by viewModel.userState
     val context = LocalContext.current
 
     // Llamar a la función isUserLoggedIn solo cuando la pantalla se muestra
     LaunchedEffect(Unit) {
-//        delay(10)
         viewModel.isUserLoggedIn(context)
     }
 
@@ -62,12 +33,11 @@ fun BlankScreen(navController: NavController, viewModel: SupabaseAuthViewModel =
         verticalArrangement = Arrangement.Center
     ) {
         // Mostrar el Loading spinner cuando el estado sea Loading
-        if (userState == UserState.Loading) {
             Loading() // Muestra el spinner de carga
-        }
 
         // Observa el estado del usuario y redirige en consecuencia
         LaunchedEffect(userState) {
+            delay(500)
             when (userState) {
                 is UserState.Authenticated -> {
                     navController.navigate("RunningProofs") {
