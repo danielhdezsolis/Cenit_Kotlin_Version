@@ -51,7 +51,7 @@ fun BlankScreen(navController: NavController, viewModel: SupabaseAuthViewModel =
 
     // Llamar a la función isUserLoggedIn solo cuando la pantalla se muestra
     LaunchedEffect(Unit) {
-        delay(10)
+//        delay(10)
         viewModel.isUserLoggedIn(context)
     }
 

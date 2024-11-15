@@ -3,6 +3,7 @@ import java.util.Properties
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.kotlinx.serialization)
 }
 
 val properties = Properties().apply {
@@ -82,7 +83,7 @@ dependencies {
     //implementation(libs.supabase.gotrue)        // Supabase GoTrue
     implementation(platform(libs.supabase.bom))
     implementation(libs.supabase.postgrest)
-    implementation(libs.ktor.client.cio)        // Ktor Client CIO
+    implementation(libs.ktor.client.android)        // Ktor Client CIO
     implementation(libs.lifecycle.viewmodel.compose) // Lifecycle ViewModel Compose
     //DataStore
     implementation(libs.data.store)

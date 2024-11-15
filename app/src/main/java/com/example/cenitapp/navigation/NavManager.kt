@@ -27,7 +27,7 @@ fun NavManager(navController: NavHostController, viewModel: SupabaseAuthViewMode
             LoginScreen(navController, viewModel)
         }
         composable("RunningProofs") {
-            RunningProofsScreen(navController)
+            RunningProofsScreen(navController, viewModel)
         }
         composable("Certificates") {
             CertificatesScreen(navController)

@@ -11,15 +11,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
+import com.example.cenitapp.SupabaseAuthViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun RunningProofsScreen(navController: NavController) {
-    ContentRunningProofsScreen()
+fun RunningProofsScreen(navController: NavController, viewModel: SupabaseAuthViewModel) {
+    ContentRunningProofsScreen(viewModel)
 }
 
 @Composable
-fun ContentRunningProofsScreen() {
+fun ContentRunningProofsScreen( viewModel: SupabaseAuthViewModel) {
     Column(
         modifier =
         Modifier.fillMaxSize(),
@@ -27,11 +28,12 @@ fun ContentRunningProofsScreen() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(text = "Running Proofs")
+        viewModel.GetProofs( LocalContext.current)
     }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun RunningProofsScreenPreview() {
-    RunningProofsScreen(navController = NavController(LocalContext.current))
+    RunningProofsScreen(navController = NavController(LocalContext.current), viewModel = SupabaseAuthViewModel())
 }
