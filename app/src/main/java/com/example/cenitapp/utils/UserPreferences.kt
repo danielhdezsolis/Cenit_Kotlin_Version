@@ -16,6 +16,7 @@ class UserPreferences(context: Context) {
 
     companion object {
         val ACCESS_TOKEN_KEY = stringPreferencesKey("accessToken")
+        val USER_UID_KEY = stringPreferencesKey("userUid")
     }
 
     // Save token
@@ -24,11 +25,22 @@ class UserPreferences(context: Context) {
             preferences[ACCESS_TOKEN_KEY] = accessToken
         }
     }
+    // Guardar el UID en UserPreferences
+    suspend fun saveUserUid(userUid: String) {
+        dataStore.edit { preferences ->
+            preferences[USER_UID_KEY] = userUid
+        }
+    }
 
     // Get token
     val accessToken: Flow<String?> = dataStore.data
         .map { preferences ->
             preferences[ACCESS_TOKEN_KEY]
+        }
+    // Obtener el UID desde UserPreferences
+    val userUid: Flow<String?> = dataStore.data
+        .map { preferences ->
+            preferences[USER_UID_KEY]
         }
 
     // Clear preferences
