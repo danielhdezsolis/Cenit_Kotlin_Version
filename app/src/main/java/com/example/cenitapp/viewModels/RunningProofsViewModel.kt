@@ -72,16 +72,22 @@ class RunningProofsViewModel : ViewModel() {
                 val endOfDayDate = Date.from(endOfDayUTC)
 
                 // Formatear a UTC
-                val sdfUTC = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX", Locale.getDefault()).apply {
-                    timeZone = TimeZone.getTimeZone("UTC")
-                }
+                val sdfUTC =
+                    SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault()).apply {
+                        timeZone = TimeZone.getTimeZone("UTC")
+                    }
 
-                val startOfTodayUTC = sdfUTC.format(startOfDayDate).replace("Z", "+00:00")
-                val endOfTodayUTC = sdfUTC.format(endOfDayDate).replace("Z", "+00:00")
+                val startOfTodayUTC = sdfUTC.format(startOfDayDate)
+                val endOfTodayUTC = sdfUTC.format(endOfDayDate)
 
-                Log.d("Supabase", "Start of Today (Local): $startOfDayLocal")
-                Log.d("Supabase", "End of Today (Local): $endOfDayLocal")
-                Log.d("Supabase", "Start of Today (UTC): $endOfDayDate")
+                Log.d("Supabase", "Hoy es: $today")
+                Log.d("Supabase", "Definir inicio: $startOfDayLocal")
+                Log.d("Supabase", "Definir fin: $endOfDayLocal")
+                Log.d("Supabase", "Fecha inicio to UTC: $startOfDayUTC")
+                Log.d("Supabase", "Fecha fin to UTC: $endOfDayUTC")
+                Log.d("Supabase", "Inicio con ajuste con diferencia UTC: $startOfDayDate")
+                Log.d("Supabase", "Fin con ajuste con diferencia UTC: $endOfDayDate")
+                Log.d("Supabase", "Start of Today (UTC): $startOfTodayUTC")
                 Log.d("Supabase", "End of Today (UTC): $endOfTodayUTC")
                 delay(500)
                 // Ejecutar consulta
@@ -92,11 +98,13 @@ class RunningProofsViewModel : ViewModel() {
                         filter {
                             eq("user_id", userUid)
                             isIn("status", listOf("completed", "running", "waiting"))
-                            gte("created_at", startOfTodayUTC)
-                            lt("created_at", endOfDayLocal)
+                            and {
+                                gte("created_at", startOfTodayUTC)
+                                lte("created_at", endOfTodayUTC)
+                            }
 
                         }
-                        order("id", order = Order.ASCENDING)
+                        order("id", order = Order.DESCENDING)
                     }
                     .decodeList()
             } catch (e: Exception) {
