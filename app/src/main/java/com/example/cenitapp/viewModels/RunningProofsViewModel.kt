@@ -102,7 +102,6 @@ class RunningProofsViewModel : ViewModel() {
                                 gte("created_at", startOfTodayUTC)
                                 lte("created_at", endOfTodayUTC)
                             }
-
                         }
                         order("id", order = Order.DESCENDING)
                     }
