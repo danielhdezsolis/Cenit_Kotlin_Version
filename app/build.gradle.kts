@@ -91,4 +91,5 @@ dependencies {
     implementation(libs.lifecycle.viewmodel.compose) // Lifecycle ViewModel Compose
     //DataStore
     implementation(libs.data.store)
+    implementation(libs.gson)
 }

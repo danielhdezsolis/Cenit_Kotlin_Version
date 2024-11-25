@@ -1,6 +1,7 @@
 package com.example.cenitapp.views
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -25,10 +26,10 @@ fun RunningProofsScreen(navController: NavController) {
     val context = LocalContext.current
     val viewModel: RunningProofsViewModel = viewModel()
 
-
     // Ejecutar la consulta cuando se navegue a esta pantalla
     LaunchedEffect(Unit) {
         viewModel.fetchProofs(context)
+        viewModel.subscribeToProofsEvents(this, context)
     }
 
     ContentRunningProofsScreen(viewModel)
@@ -54,6 +55,7 @@ fun ContentRunningProofsScreen(viewModel: RunningProofsViewModel) {
             errorMessage != null -> Text(text = errorMessage ?: "Unknown error")
             proofs.isEmpty() -> Text(text = "No hay datos disponibles.")
             else -> {
+                Log.d("Supabase", "Proofs list: $proofs")
                 // Renderizar la lista de proofs
                 proofs.forEach { proof ->
                     Text(text = "Proof ID: ${proof.id}, Status: ${proof.status}, Date: ${proof.created_at}")
